@@ -1,0 +1,88 @@
+{
+      "Create":
+      {
+            "category": "Holi",
+            "title": "Holi Celebrations",
+            "phoneNo": "9988776655",
+            "venue":"Resort",
+            "location":"Sri sai nilayam",
+            "mesg":"Please welcome",
+            "regionalmesg":"Weclome",
+            "guesttype":"Adults Only"
+      },
+      "CreateUS":
+      {
+            "category": "Holi",
+            "title": "Christmas Celebrations",
+            "phoneNo": "6400900999",
+            "venue":"Church",
+            "USlocation":"123 Walton",
+            "mesg":"Please welcome",
+            "regionalmesg":"Weclome",
+            "guesttype":"Adults Only"
+      },
+      "Manual_Location":
+      {
+            "address": "Sai Baba temple street",
+            "city": "Vijayawada",
+            "state": "Andhrapradesh",
+            "zip": "521108",
+            "liveurl": "https://www.google.com/maps/place/17%C2%B026'24.2%22N+78%C2%B023'02.4%22E/@17.4400433,78.3814227,17z/data=!3m1!4b1!4m4!3m3!8m2!3d17.4400433!4d78.3839976?hl=en&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+            
+      },
+      "Manual_US_Location":
+      {
+            "address": "105 Sikes Hall, Clemson",
+            "city": "Clemson",
+            "state": "South Carolina",
+            "zip": "29634",
+            "liveurl": "https://www.google.com/maps/search/clemson+university+address++location+url/@34.5577971,-83.0073088,10.3z?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+      },
+      "Guests":
+      {
+            "guestemails":"kovidha2602@gmail.com, krishna.b260265@gmail.com",
+            "guestphone":"9977886655"
+      },
+      "Card":
+      {
+            "cardNo":"3782 822463 10005",
+            "expirydate":"10 / 25",
+             "CVV":"809"
+      },
+      "Cohost":
+      {
+            "cohostName": "Krishna",
+           "cohostEmail":"krishna.b260265@gmail.com"
+      },
+
+      "Update":
+      {
+           
+           "editTitle" : "Diwali Celebrations",
+           "editHostname": "Kovidha Bhogineni",
+           "editPhone": "9988776677",
+           "editcohostname":"Roopa",
+           "editcohostemail": "roopab260265@gmail.com",
+           "editstartTime": "07:30 PM",
+           "editendTime": "11:30 PM",
+           "editVenue": "Home-BlockA",
+           "editLocation": "7th Ave San Francisco",
+           "editmesg": "Please Welcome to the Party.",
+           "editregionalmesg": "Please welcome"
+      },
+
+      "editresponse":
+      {
+            "response" : "No",
+            "adultscount" : "3",
+            "kidscount": "4"
+      }
+      
+    
+      
+
+      
+     
+
+  
+}

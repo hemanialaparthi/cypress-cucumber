@@ -1,0 +1,152 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 1,
+    "pending": 0,
+    "failures": 2,
+    "start": "2025-05-15T02:41:37.433Z",
+    "end": "2025-05-15T02:42:19.462Z",
+    "duration": 42029,
+    "testsRegistered": 3,
+    "passPercent": 33.33333333333333,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "87f85b06-6507-40d0-874e-fea763356b07",
+      "title": "",
+      "fullFile": "cypress\\e2e\\Inytes\\Invitation.feature",
+      "file": "cypress\\e2e\\Inytes\\Invitation.feature",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1347a3e8-90c5-4c6d-8fe7-1a8df180d047",
+          "title": "Invitations",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "User should able to see all the cards",
+              "fullTitle": "Invitations User should able to see all the cards",
+              "timedOut": null,
+              "duration": 18793,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const state = window.testState;\nreturn cy\n  .then(() => state.onStartScenario(scenario, indexedSteps))\n  .then(() =>\n    resolveAndRunBeforeHooks.call(this, scenario.tags, state.feature.name)\n  )\n  .then(() =>\n    indexedSteps.forEach((step) =>\n      stepTest.call(this, state, step, rowData)\n    )\n  )\n  .then(() => state.onFinishScenario(scenario));",
+              "err": {},
+              "uuid": "5907eeae-ffcd-4d69-b896-4233d384dd82",
+              "parentUUID": "1347a3e8-90c5-4c6d-8fe7-1a8df180d047",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "User should not able to create the Invitation before Login",
+              "fullTitle": "Invitations User should not able to create the Invitation before Login",
+              "timedOut": null,
+              "duration": 3502,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const state = window.testState;\nreturn cy\n  .then(() => state.onStartScenario(scenario, indexedSteps))\n  .then(() =>\n    resolveAndRunBeforeHooks.call(this, scenario.tags, state.feature.name)\n  )\n  .then(() =>\n    indexedSteps.forEach((step) =>\n      stepTest.call(this, state, step, rowData)\n    )\n  )\n  .then(() => state.onFinishScenario(scenario));",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://www.dev.inytes.com/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://www.dev.inytes.com/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n    at <unknown> (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131607:74)\n    at visitFailedByErr (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131006:12)\n    at <unknown> (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131606:11)\n    at tryCatcher (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at InvitationPage.Invitation (cypress/POM/Invitationspage.js:5:11)\n    at Context.eval (cypress/e2e/Inytes/Invitation.cy.js:25:11)\n    at Context.resolveAndRunStepDefinition (node_modules/cypress-cucumber-preprocessor/lib/resolveStepDefinition.js:193:0)\n    at Context.eval (node_modules/cypress-cucumber-preprocessor/lib/createTestFromScenario.js:27:0)\n\nFrom Node.js Internals:\n  Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)",
+                "diff": null
+              },
+              "uuid": "ab6cfd84-a8c3-4e57-9b67-5508d21e4c42",
+              "parentUUID": "1347a3e8-90c5-4c6d-8fe7-1a8df180d047",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "User should able to Login",
+              "fullTitle": "Invitations User should able to Login",
+              "timedOut": null,
+              "duration": 9263,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const state = window.testState;\nreturn cy\n  .then(() => state.onStartScenario(scenario, indexedSteps))\n  .then(() =>\n    resolveAndRunBeforeHooks.call(this, scenario.tags, state.feature.name)\n  )\n  .then(() =>\n    indexedSteps.forEach((step) =>\n      stepTest.call(this, state, step, rowData)\n    )\n  )\n  .then(() => state.onFinishScenario(scenario));",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://www.dev.inytes.com/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://www.dev.inytes.com/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n    at <unknown> (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131607:74)\n    at visitFailedByErr (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131006:12)\n    at <unknown> (https://dev.inytes.com/__cypress/runner/cypress_runner.js:131606:11)\n    at tryCatcher (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://dev.inytes.com/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (https://dev.inytes.com/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at InvitationPage.Invitation (cypress/POM/Invitationspage.js:5:11)\n    at Context.eval (cypress/e2e/Inytes/Invitation.cy.js:49:11)\n    at Context.resolveAndRunStepDefinition (node_modules/cypress-cucumber-preprocessor/lib/resolveStepDefinition.js:193:0)\n    at Context.eval (node_modules/cypress-cucumber-preprocessor/lib/createTestFromScenario.js:27:0)\n\nFrom Node.js Internals:\n  Error: getaddrinfo ENOTFOUND www.dev.inytes.com\n      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)",
+                "diff": null
+              },
+              "uuid": "5ec98b63-c841-4dfe-a613-c1d88cab52ca",
+              "parentUUID": "1347a3e8-90c5-4c6d-8fe7-1a8df180d047",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5907eeae-ffcd-4d69-b896-4233d384dd82"
+          ],
+          "failures": [
+            "ab6cfd84-a8c3-4e57-9b67-5508d21e4c42",
+            "5ec98b63-c841-4dfe-a613-c1d88cab52ca"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 31558,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
