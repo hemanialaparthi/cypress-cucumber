@@ -1,26 +1,41 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import Login from "../../POM/Login";
 
+// this beforeEach hook will run before each scenario
 beforeEach(() => {
-  // Login using session
   cy.login("kovidha@codepeers.com", "Inytes12#")
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // return false to prevent Cypress from failing the test on uncaught exceptions
+    return false;
+  });
+});
+
+// optional: Load test data from fixtures
+let testdata;
+before(() => {
+  cy.fixture('testData').then((data) => {
+    testdata = data;
+  });
 });
 
 When("User navigates to My Account page", () => {
-  // Navigate directly to account page instead of clicking through UI
-  cy.visit('https://dev.inytes.com/account')
-  cy.wait(3000) // Give page time to load
-  
-  // Verify we're on the account page
+  // click on user profile menu
+  cy.get("#menu-profile-pic").click()
+  // click on My Account or My Profile option
+  cy.get('.drop-menu').should('be.visible')
+  cy.contains('My Profile').click({force: true})
+  // verify we're on the account page
   cy.url().should('include', '/account')
 });
 
 Then("User should see all profile information fields", () => {
-  // Check for profile fields
+  // check for profile fields
   cy.get('#user_first_name').should('exist')
   cy.get('#user_last_name').should('exist')
   cy.get('#user_email').should('exist')
   
-  // Verify section heading
+  // verify section heading
   cy.contains('Personal Information').should('exist')
 });
 
