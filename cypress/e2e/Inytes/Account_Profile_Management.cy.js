@@ -21,6 +21,7 @@ before(() => {
 
 When("User navigates to My Account page", () => {
   // click on user profile menu
+  cy.visit("https://dev.inytes.com")
   cy.get("#menu-profile-pic").click()
   // click on My Account or My Profile option
   cy.get('.drop-menu').should('be.visible')
