@@ -3,7 +3,7 @@ import Login from "../../POM/Login";
 
 // this beforeEach hook will run before each scenario
 beforeEach(() => {
-  cy.login("kovidha@codepeers.com", "Inytes12#")
+  cy.login("hemanialaparthi@gmail.com", "IamTesting")
 
   Cypress.on('uncaught:exception', (err, runnable) => {
     // return false to prevent Cypress from failing the test on uncaught exceptions
