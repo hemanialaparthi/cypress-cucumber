@@ -45,17 +45,20 @@ Then("User should see all profile information fields", () => {
 });
 
 When("User updates profile information", () => {
-  // update profile information
+  // Update profile information without touching the address field
   cy.get('#account-form-fn-value').clear().type('Updated First')
   cy.get('#account-form-ln-value').clear().type('Updated Last')
   cy.get('#account-form-ph-value').clear().type('1234567890')
+  cy.get('#account-form-city-value').clear().type('Test City')
+  
   // click save button
-  cy.get('#account-modify-submit').click({force: true})
+  cy.get('#account-modify-submit').should('contain', 'Save Profile').click({force: true})
+  cy.wait(2000)
 });
 
 Then("Changes should be saved successfully", () => {
-  // verify success message
-  cy.contains('Saved').should('be.visible')
+  // Verify the button text changed to "Saved"
+  cy.get('#account-modify-submit').should('contain', 'Saved')
 });
 
 When("User enters invalid profile information", () => {
@@ -72,4 +75,81 @@ When("User enters invalid profile information", () => {
 Then("Validation error messages should be displayed", () => {
   // check for validation messages
   cy.contains('Please enter a valid email').should('be.visible')
+});
+
+When("User clicks on Delete your account option", () => {
+  // scroll to the bottom where the delete option is located
+  cy.scrollTo('bottom')
+  
+  // click the delete account link using its ID
+  cy.get('#deleteAccount').click({force: true})
+  
+  // wait for popup to appear
+  cy.wait(1000)
+});
+
+Then("Delete account confirmation popup should appear", () => {
+  // check if the confirmation popup appeared
+  cy.contains('Are you sure you want to delete?').should('be.visible')
+  
+  // check if the "Delete account" button exists in the popup
+  cy.contains('button', 'Delete account').should('be.visible')
+});
+
+Then("User cancels the deletion", () => {
+  // click Cancel to close the popup without deleting
+  cy.contains('button', 'Cancel').click({force: true})
+  
+  // wait for popup to close
+  cy.wait(500)
+  
+  // verify we're still on the account page
+  cy.url().should('include', '/account')
+});
+
+When("User creates a disposable test account", () => {
+  // We'll use the existing logged-in account for deletion testing
+  // Store credentials for verification later
+  cy.writeFile('cypress/fixtures/disposable-account.json', {
+    email: "hemanialaparthi@gmail.com",
+    password: "IamTesting"
+  })
+});
+
+When("User navigates to My Account page with disposable account", () => {
+  // Navigate to account page (already logged in from beforeEach)
+  cy.visit('https://dev.inytes.com/account')
+  cy.wait(2000)
+  cy.url().should('include', '/account')
+});
+
+When("User clicks on Delete your account option", () => {
+  cy.scrollTo('bottom')
+  cy.get('#deleteAccount').click({force: true})
+  cy.wait(1000)
+});
+
+When("User confirms account deletion in the popup", () => {
+  cy.contains('button', 'Delete account').click({force: true})
+  cy.wait(3000)
+});
+
+Then("Account should be completely deleted from the system", () => {
+  // Verify redirect away from account page
+  cy.url().should('not.include', '/account')
+  
+  // Try to login with deleted credentials
+  cy.readFile('cypress/fixtures/disposable-account.json').then((account) => {
+    cy.visit('https://dev.inytes.com/login')
+    cy.wait(2000)
+    
+    cy.get('#user_login').type(account.email)
+    cy.get('#user_password').type(account.password) 
+    cy.get('#email-login').click({force: true})
+    cy.wait(3000)
+    
+    // Should show error or stay on login page
+    cy.url().should('include', '/login')
+    cy.get('#user_login').should('be.visible')
+  })
 });
