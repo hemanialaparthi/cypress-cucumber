@@ -39,7 +39,7 @@ Given("Login page", ()=>{
 })
 When("valid credentails is provided", ()=>{  
     
-    cy.login("kovidha@codepeers.com", "Inytes12#")
+    cy.login("hemanialaparthi@gmail.com", "IamTesting")
     
 })
 Then("should able to Login", ()=>{

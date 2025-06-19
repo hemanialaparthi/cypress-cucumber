@@ -23,7 +23,7 @@ describe('Create Invitation with Locate address', () => {
 
     beforeEach(() => {
 
-      cy.login("kovidha@codepeers.com", "Inytes12#")
+      cy.login("hemanialaparthi@gmail.com", "IamTesting")
 
       Cypress.on('uncaught:exception', (err, runnable) => {
         // Return false to prevent Cypress from failing the test on uncaught exceptions
