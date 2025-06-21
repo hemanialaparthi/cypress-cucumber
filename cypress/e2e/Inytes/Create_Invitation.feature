@@ -1,5 +1,5 @@
 Feature: Create Invitation
-@focus
+
 Scenario: Create the Invitation by locating the address with Indian address
 # Given Login into the application
 When create the Invitation with locate address-Indian address
@@ -52,4 +52,18 @@ Then Invitation should be not be created
 Scenario: Create the Invitation with personalize Event card.
 # Given Login into the application
 When create the Invitation with personalize Event card
+Then Invitation should be created
+
+
+Scenario: User should able to create RSVP card from the Featured Cards.
+# Given Login into the application
+Given Select any Featured cards
+When create the Invitation with personalize RSVP card
+Then Invitation should be created
+
+@focus
+Scenario: User should able to create RSVP card from the Popular Cards.
+# Given Login into the application
+Given Select any Popular card
+When create the Invitation with personalize RSVP card
 Then Invitation should be created

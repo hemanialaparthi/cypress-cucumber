@@ -12,17 +12,35 @@ class CreateCard
 
       cy.contains('a', category).click({force:true});
       cy.wait(4000)
-   //    cy.get('.cd-filter-content').find('.search-cat').each(($el)=>{
+      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+   }
 
-   //      if ($el.text().includes('Baby Shower')) {
-   //          cy.wrap($el).click({force:true}); 
-   //      }
-   //   })
-   //   cy.wait(4000)
+   featuredCards()
+   {
+    cy.visit("https://dev.inytes.com")
+      
+
+      cy.get('.featured').should('contain', "Featured Cards")
+
+      cy.get('.cd-item').eq(1).find('a.cd-trigger').click();
+      cy.wait(4000)
+   }
+   popularCards()
+   {
+    cy.visit("https://dev.inytes.com")
+      
+
+      cy.get('.popular-section').should('contain', "Popular Cards")
+
+      cy.get('.popular-section').find('.cd-item').eq(0).within(() => {
+      cy.get('.cd-trigger-popular').click();
+      cy.wait(4000)
+    });
+      
    }
    createInvite(title, phoneNo, venue, location, mesg, regionalmesg)
    {
-     cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+     
      cy.contains('a', 'Personalize RSVP').should('exist').click()
 
       cy.get('#nextDetails').click()
@@ -52,7 +70,7 @@ class CreateCard
    }
    createInviteManually(title, phoneNo, venue, address, city, state, zip, liveurl, mesg, regionalmesg)
    {
-     cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+     
      cy.contains('a', 'Personalize RSVP').should('exist').click()
       cy.get('#nextDetails').click()
       cy.wait(10000)
@@ -77,7 +95,7 @@ class CreateCard
    }
    selectAllradiobuttons(title, phoneNo, venue, location, mesg, regionalmesg, guesttype)
    {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+      
       cy.contains('a', 'Personalize RSVP').should('exist').click({force:true})
       cy.get('#nextDetails').click()
       cy.wait(10000)
@@ -102,7 +120,7 @@ class CreateCard
    }
    unselectAllradiobuttons(title, phoneNo, venue, location, mesg, regionalmesg, guesttype)
    {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+      
       cy.contains('a', 'Personalize RSVP').should('exist').click({force:true})
       cy.get('#nextDetails').click()
       cy.wait(10000)
@@ -127,7 +145,7 @@ class CreateCard
 
     createInvitewithoutanydata()
     {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+      
       cy.contains('a', 'Personalize RSVP').should('exist').click({force:true})
       cy.get('#nextDetails').click()
       cy.get('#nextSettings').click()
@@ -138,7 +156,7 @@ class CreateCard
     }
     createInvitewithoutManualaddressdata(title, phoneNo, venue, mesg, regionalmesg)
     {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+
       cy.contains('a', 'Personalize RSVP').should('exist').click()
       cy.get('#nextDetails').click()
       cy.wait(10000)
@@ -159,7 +177,7 @@ class CreateCard
 
     createInvitewithoutaddress(title, phoneNo, venue, mesg, regionalmesg)
     {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+      
       cy.contains('a', 'Personalize RSVP').should('exist').click()
       cy.get('#nextDetails').click()
       cy.wait(10000)
@@ -180,7 +198,7 @@ class CreateCard
     AftercreateclickonAddGuest(title, phoneNo, venue, location, mesg, regionalmesg)
    {
       
-     cy.get("#mix-up-list").find('.cd-item').eq(0).click()
+     
      cy.contains('a', 'Personalize RSVP').should('exist').click()
 
       cy.get('#nextDetails').click()

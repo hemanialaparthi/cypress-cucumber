@@ -119,3 +119,25 @@ When("create the Invitation with personalize Event card", ()=>
 
 })
 
+Given("Select any Featured cards", ()=>
+{
+      const createdata = testdata.Create;
+      const create = new CreateCard()
+      create.featuredCards()
+})
+When("create the Invitation with personalize RSVP card", ()=>
+  {
+          const createdata = testdata.CreateUS;
+          const create = new CreateCard()
+          create.categoryselect(createdata.category)
+          create.createInvite(createdata.title, createdata.phoneNo, createdata.venue, createdata.USlocation, createdata.mesg, createdata.regionalmesg)
+   })
+
+Given("Select any Popular card", ()=>
+{
+      const createdata = testdata.Create;
+      const create = new CreateCard()
+      create.popularCards()
+})
+
+
