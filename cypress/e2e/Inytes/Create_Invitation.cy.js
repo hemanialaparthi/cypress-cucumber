@@ -140,4 +140,22 @@ Given("Select any Popular card", ()=>
       create.popularCards()
 })
 
+When("create the Invitation with edited card data", ()=>
+{
+      const editedData = testdata.EditedCreate;
+      const create = new CreateCard()
+      create.categoryselect(editedData.category)
+      create.createInviteWithEditedData(
+            editedData.initialTitle, 
+            editedData.editedTitle, 
+            editedData.initialPhoneNo, 
+            editedData.editedPhoneNo, 
+            editedData.initialVenue, 
+            editedData.editedVenue, 
+            editedData.location, 
+            editedData.mesg, 
+            editedData.regionalmesg
+      )
+})
+
 

@@ -272,5 +272,34 @@ class CreateCard
        
     }
 
+    createInviteWithEditedData(initialTitle, editedTitle, initialPhoneNo, editedPhoneNo, initialVenue, editedVenue, location, mesg, regionalmesg)
+    {
+      cy.contains('a', 'Personalize RSVP').should('exist').click()
+      cy.get('#nextDetails').click()
+      cy.wait(10000)
+      
+      // first, enter initial data
+      cy.get("#vTitle", { timeout: 15000 }).should('be.visible').type(initialTitle)
+      cy.get('#vPhone').type(initialPhoneNo)
+      cy.get('#vLocationName').type(initialVenue)
+      cy.get('#vFA').type(location).wait(4000)
+      // click on the first suggestion
+      cy.get('.pac-item').first().click();
+      
+      // now, edit the data
+      cy.get("#vTitle").clear().type(editedTitle)
+      cy.get('#vPhone').clear().type(editedPhoneNo)
+      cy.get('#vLocationName').clear().type(editedVenue)
+      
+      cy.get('#nextSettings').click()
+      cy.get('#addMessage').click({ force: true })
+      cy.get('#tMessageieditor').type(mesg)
+      cy.get('#addLangMessage').click({ force: true })
+      cy.get('#tOtherMessage').type(regionalmesg).type('{enter}')
+      cy.get('#create-preview-card').click()
+      cy.get('#addGuests').scrollIntoView()
+      cy.wait(1000)
+    }
+
 }
 export default CreateCard;
