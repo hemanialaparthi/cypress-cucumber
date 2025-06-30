@@ -254,22 +254,33 @@ class CreateCard
 
     createInviteforEventCard(title)
     {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
-      // cy.contains('a', 'Personalize Event').should('exist').click()
-      cy.get('a.customize-link1').click();
-      cy.get('.sweet-alert h2').should('have.text', 'Event Cards');
-      // cy.get('.sweet-alert p').should('have.text', 'Tip: You can only create and download an event card with this choice. If you want to use our RSVP system to send out invitations, use the RSVP event option.');
-      // cy.get('button.confirm').click({force:true})
-      // cy.contains('OK').click({force:true})
-   
-      cy.get('div.sweet-alert button.confirm').should('be.visible').click({force:true});
-      cy.wait(2000)
-      cy.location('pathname', { timeout: 10000 }).should('include', '/create-invitation/');
-       cy.get('#nextDetails').click()
-       cy.get("#vTitle", { timeout: 15000 }).should('be.visible').type(title)
-       cy.get('#saveGreeting').click()
-       cy.get('#downloadGreeting').should('contain', 'Pay to Download')
-       
+        // First select a card
+        cy.get("#mix-up-list").find('.cd-item').eq(0).click({force: true})
+        cy.wait(2000) // Wait for card to be selected
+        
+        // Wait for and click on Personalize Event Card button
+        cy.get('a.customize-link1').should('be.visible').should('contain', 'Personalize Event').click({force: true})
+        cy.wait(2000)
+        
+        // Handle the popup
+        cy.get('.sweet-alert h2').should('have.text', 'Event Cards')
+        cy.get('div.sweet-alert button.confirm').should('be.visible').click({force: true})
+        cy.wait(2000)
+        
+        // Check if URL contains /create-invitation/
+        cy.location('pathname', { timeout: 10000 }).should('include', '/create-invitation/')
+        
+        // Click Next Details button
+        cy.get('#nextDetails').click()
+        
+        // Check if event title input exists and fill it
+        cy.get("#vTitle1", { timeout: 15000 }).should('be.visible').type(title)
+        
+        // Click Save button
+        cy.get('#saveGreeting').click()
+        
+        // Check if download button is present
+        cy.get('#downloadGreeting').should('contain', 'Pay to Download')
     }
 
     createInviteWithEditedData(initialTitle, editedTitle, initialPhoneNo, editedPhoneNo, initialVenue, editedVenue, location, mesg, regionalmesg)
