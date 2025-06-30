@@ -340,5 +340,42 @@ class CreateCard
         cy.wait(2000)
     }
 
+    createEventCardFromPopular(title)
+    {
+        // Navigate to main page and select popular card
+        cy.visit("https://dev.inytes.com")
+        
+        // Verify Popular Cards section exists
+        cy.get('.popular-section').should('contain', "Popular Cards")
+        
+        // Click on the first popular card
+        cy.get('.popular-section').find('.cd-item').eq(0).within(() => {
+            cy.get('.cd-trigger-popular').click();
+        });
+        cy.wait(3000)
+        
+        // Click "Personalize Event" button
+        cy.get('a.customize-link1').contains('Event').click({force: true})
+        cy.wait(2000)
+        
+        // Handle the tip popup
+        cy.get('.sweet-alert h2').should('contain', 'Event')
+        cy.get('div.sweet-alert button.confirm').click({force: true})
+        cy.wait(3000)
+        
+        // Skip image upload for Popular Cards - go directly to Next
+        cy.get('#nextDetails').click()
+        
+        // Fill in event details
+        cy.get("#vTitle1", { timeout: 15000 }).type(title, {force: true})
+        cy.get('#vHostName1').type('Test Host Name', {force: true})
+        cy.get('#dCountry').select('INDIA', {force: true})
+        cy.get('#dDate1').type('2025-12-31', {force: true})
+        
+        // Save
+        cy.get('#saveGreeting').click({force: true})
+        cy.wait(2000)
+    }
+
 }
 export default CreateCard;

@@ -172,4 +172,11 @@ Then("Event card should be created successfully", ()=>
     // cy.get('[data-cy="preview-button"]').should('be.visible')
 })
 
+When("create the Event card with personalize Event card option from Popular Cards", ()=>
+{
+    const createdata = testdata.Create;
+    const create = new CreateCard()
+    create.createEventCardFromPopular(createdata.title)
+})
+
 

@@ -78,3 +78,9 @@ Scenario: User should able to create Event card from the Featured Cards.
 Given Select any Featured cards
 When create the Event card with personalize Event card option
 Then Event card should be created successfully
+
+@focus
+Scenario: User should able to create Event card from the Popular Cards.
+Given Select any Popular card
+When create the Event card with personalize Event card option from Popular Cards
+Then Event card should be created successfully
