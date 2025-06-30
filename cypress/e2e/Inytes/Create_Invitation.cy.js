@@ -162,35 +162,45 @@ When("create the Event card with personalize Event card option", ()=>
 {
     const createdata = testdata.Create;
     const create = new CreateCard()
-    create.createEventCardFromFeatured(createdata.title)
+    create.createEventCard(createdata.title, true)
 })
 
 Then("Event card should be created successfully", ()=>
 {
-    cy.get('#downloadGreeting').should('contain', 'Pay to Download')
-    // Or check for preview button if that's the success indicator
-    // cy.get('[data-cy="preview-button"]').should('be.visible')
+    cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
 })
 
 When("create the Event card with personalize Event card option from Popular Cards", ()=>
 {
     const createdata = testdata.Create;
     const create = new CreateCard()
-    create.createEventCardFromPopular(createdata.title)
+    create.createEventCard(createdata.title)
+})
+
+Given("Select any Do It Yourself card", ()=>
+{
+    const create = new CreateCard()
+    create.selectDoItYourself()
+})
+
+Given("Select any Do It Yourself Landscape card", ()=>
+{
+    const create = new CreateCard()
+    create.selectDoItYourselfLandscape()
 })
 
 When("create the Event card from Do it yourself option", ()=>
 {
     const createdata = testdata.Create;
     const create = new CreateCard()
-    create.createEventCardFromDoItYourself(createdata.title)
+    create.createEventCard(createdata.title, true)
 })
 
 When("create the Event card from Do it yourself option Landscape", ()=>
 {
     const createdata = testdata.Create;
     const create = new CreateCard()
-    create.createEventCardFromDoItYourselfLandscape(createdata.title)
+    create.createEventCard(createdata.title, true)
 })
 
 

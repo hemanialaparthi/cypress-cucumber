@@ -87,10 +87,11 @@ Then Event card should be created successfully
 
 
 Scenario: User should able to create the invitation from Do it yourself.
+Given Select any Do It Yourself card
 When create the Event card from Do it yourself option
 Then Event card should be created successfully
 
-@focus
 Scenario: User should able to create the invitation from Do it yourself- Landscape.
+Given Select any Do It Yourself Landscape card
 When create the Event card from Do it yourself option Landscape
 Then Event card should be created successfully
