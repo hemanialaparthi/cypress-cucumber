@@ -84,3 +84,8 @@ Scenario: User should able to create Event card from the Popular Cards.
 Given Select any Popular card
 When create the Event card with personalize Event card option from Popular Cards
 Then Event card should be created successfully
+
+@focus
+Scenario: User should able to create the invitation from Do it yourself.
+When create the Event card from Do it yourself option
+Then Event card should be created successfully

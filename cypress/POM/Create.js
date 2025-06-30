@@ -337,7 +337,8 @@ class CreateCard
         
         // Save
         cy.get('#saveGreeting').click({force: true})
-        cy.wait(2000)
+        cy.wait(6000)
+        cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
     }
 
     createEventCardFromPopular(title)
@@ -374,7 +375,51 @@ class CreateCard
         
         // Save
         cy.get('#saveGreeting').click({force: true})
+        cy.wait(6000)
+        cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
+    }
+
+    createEventCardFromDoItYourself(title)
+    {
+        // Navigate to invitations page
+        cy.visit("https://dev.inytes.com/invitations")
+        
+        // Click on "Do it yourself" button in the filter menu
+        cy.get('#filter-menu').find('a[data-cat="upload"]').contains('Do It').click()
+        cy.wait(3000)
+        
+        // Click on the first card (Upload Yours)
+        cy.get('a.cd-trigger[title="Upload Yours"]').first().click()
+        cy.wait(3000)
+        
+        // Click "Personalize Event" button
+        cy.get('a.customize-link1').contains('Event').click({force: true})
         cy.wait(2000)
+        
+        // Handle the tip popup
+        cy.get('.sweet-alert h2').should('contain', 'Event')
+        cy.get('div.sweet-alert button.confirm').click({force: true})
+        cy.wait(3000)
+        
+        // Upload photo
+        cy.get('input[type="file"]').selectFile('cypress/fixtures/test-image.png', { force: true })
+        cy.wait(2000)
+        cy.get('#cropButton').click({force: true})
+        cy.wait(2000)
+        
+        // Click Next button
+        cy.get('#nextDetails').click()
+        
+        // Fill in event details
+        cy.get("#vTitle1", { timeout: 15000 }).type(title, {force: true})
+        cy.get('#vHostName1').type('Test Host Name', {force: true})
+        cy.get('#dCountry').select('INDIA', {force: true})
+        cy.get('#dDate1').type('2025-12-31', {force: true})
+        
+        // Save
+        cy.get('#saveGreeting').click({force: true})
+        cy.wait(6000)
+        cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
     }
 
 }

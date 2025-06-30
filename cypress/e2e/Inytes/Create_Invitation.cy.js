@@ -179,4 +179,11 @@ When("create the Event card with personalize Event card option from Popular Card
     create.createEventCardFromPopular(createdata.title)
 })
 
+When("create the Event card from Do it yourself option", ()=>
+{
+    const createdata = testdata.Create;
+    const create = new CreateCard()
+    create.createEventCardFromDoItYourself(createdata.title)
+})
+
 
