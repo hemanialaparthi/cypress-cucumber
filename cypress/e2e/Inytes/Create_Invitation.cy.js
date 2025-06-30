@@ -186,4 +186,11 @@ When("create the Event card from Do it yourself option", ()=>
     create.createEventCardFromDoItYourself(createdata.title)
 })
 
+When("create the Event card from Do it yourself option Landscape", ()=>
+{
+    const createdata = testdata.Create;
+    const create = new CreateCard()
+    create.createEventCardFromDoItYourselfLandscape(createdata.title)
+})
+
 

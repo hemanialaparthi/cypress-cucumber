@@ -73,19 +73,24 @@ Scenario: User should able to create the Invitation when data in card is edited.
 When create the Invitation with edited card data
 Then Invitation should be created
 
-@focus
+
 Scenario: User should able to create Event card from the Featured Cards.
 Given Select any Featured cards
 When create the Event card with personalize Event card option
 Then Event card should be created successfully
 
-@focus
+
 Scenario: User should able to create Event card from the Popular Cards.
 Given Select any Popular card
 When create the Event card with personalize Event card option from Popular Cards
 Then Event card should be created successfully
 
-@focus
+
 Scenario: User should able to create the invitation from Do it yourself.
 When create the Event card from Do it yourself option
+Then Event card should be created successfully
+
+@focus
+Scenario: User should able to create the invitation from Do it yourself- Landscape.
+When create the Event card from Do it yourself option Landscape
 Then Event card should be created successfully
