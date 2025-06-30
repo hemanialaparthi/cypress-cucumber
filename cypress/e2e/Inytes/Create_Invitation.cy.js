@@ -158,4 +158,18 @@ When("create the Invitation with edited card data", ()=>
       )
 })
 
+When("create the Event card with personalize Event card option", ()=>
+{
+    const createdata = testdata.Create;
+    const create = new CreateCard()
+    create.createEventCardFromFeatured(createdata.title)
+})
+
+Then("Event card should be created successfully", ()=>
+{
+    cy.get('#downloadGreeting').should('contain', 'Pay to Download')
+    // Or check for preview button if that's the success indicator
+    // cy.get('[data-cy="preview-button"]').should('be.visible')
+})
+
 

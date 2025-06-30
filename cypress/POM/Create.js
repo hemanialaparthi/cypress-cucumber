@@ -301,5 +301,44 @@ class CreateCard
       cy.wait(1000)
     }
 
+    createEventCardFromFeatured(title)
+    {
+        // Navigate to main page and select featured card
+        cy.visit("https://dev.inytes.com")
+        
+        // Verify Featured Cards section exists
+        cy.get('.featured').should('contain', "Featured Cards")
+        
+        // Click on the first featured card
+        cy.get('.featured .cd-item').first().find('a.cd-trigger').click()
+        cy.wait(3000)
+        
+        // Click "Personalize Event" button
+        cy.get('a.customize-link1').contains('Event').click({force: true})
+        cy.wait(2000)
+        
+        // Handle the tip popup
+        cy.get('.sweet-alert h2').should('contain', 'Event')
+        cy.get('div.sweet-alert button.confirm').click({force: true})
+        cy.wait(3000)
+        
+        // Upload photo
+        cy.get('input[type="file"]').selectFile('cypress/fixtures/test-image.png', { force: true })
+        cy.wait(2000)
+        cy.get('#cropButton').click({force: true})
+        cy.wait(2000)
+        
+        // Click Next and fill form
+        cy.get('#nextDetails').click()
+        cy.get("#vTitle1", { timeout: 15000 }).type(title, {force: true})
+        cy.get('#vHostName1').type('Test Host Name', {force: true})
+        cy.get('#dCountry').select('INDIA', {force: true})
+        cy.get('#dDate1').type('2025-12-31', {force: true})
+        
+        // Save
+        cy.get('#saveGreeting').click({force: true})
+        cy.wait(2000)
+    }
+
 }
 export default CreateCard;
