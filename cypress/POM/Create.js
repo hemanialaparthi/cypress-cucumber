@@ -337,7 +337,7 @@ class CreateCard
         
         // Save
         cy.get('#saveGreeting').click({force: true})
-        cy.wait(6000)
+        cy.wait(9000)
         cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
     }
 
@@ -375,7 +375,7 @@ class CreateCard
         
         // Save
         cy.get('#saveGreeting').click({force: true})
-        cy.wait(6000)
+        cy.wait(9000)
         cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
     }
 
@@ -418,7 +418,7 @@ class CreateCard
         
         // Save
         cy.get('#saveGreeting').click({force: true})
-        cy.wait(6000)
+        cy.wait(9000)
         cy.get('#downloadGreeting', { timeout: 15000 }).should('be.visible')
     }
 
