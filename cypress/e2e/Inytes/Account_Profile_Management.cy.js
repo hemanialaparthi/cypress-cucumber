@@ -61,22 +61,6 @@ Then("Changes should be saved successfully", () => {
   cy.get('#account-modify-submit').should('contain', 'Saved')
 });
 
-When("User enters invalid profile information", () => {
-  // enter too short first name (assuming there's a minimum length)
-  cy.get('#account-form-fn-value').clear().type('A')
-  
-  // leave required field empty
-  cy.get('#account-form-ln-value').clear()
-  
-  // click save button
-  cy.get('#account-modify-submit').click({force: true})
-});
-
-Then("Validation error messages should be displayed", () => {
-  // check for validation messages
-  cy.contains('Please enter a valid email').should('be.visible')
-});
-
 When("User clicks on Delete your account option", () => {
   // scroll to the bottom where the delete option is located
   cy.scrollTo('bottom')

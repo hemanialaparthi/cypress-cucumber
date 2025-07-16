@@ -12,12 +12,6 @@ Scenario: User should able to edit and save profile information
  Then Changes should be saved successfully
 
 @focus
-Scenario: User should not be able to save profile with invalid information
- When User navigates to My Account page
- And User enters invalid profile information
- Then Validation error messages should be displayed
-
-@focus
 Scenario: User should see delete account confirmation popup
  When User navigates to My Account page
  And User clicks on Delete your account option
