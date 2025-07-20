@@ -254,23 +254,139 @@ class CreateCard
 
     createInviteforEventCard(title)
     {
-      cy.get("#mix-up-list").find('.cd-item').eq(0).click()
-      // cy.contains('a', 'Personalize Event').should('exist').click()
-      cy.get('a.customize-link1').click();
-      cy.get('.sweet-alert h2').should('have.text', 'Event Cards');
-      // cy.get('.sweet-alert p').should('have.text', 'Tip: You can only create and download an event card with this choice. If you want to use our RSVP system to send out invitations, use the RSVP event option.');
-      // cy.get('button.confirm').click({force:true})
-      // cy.contains('OK').click({force:true})
-   
-      cy.get('div.sweet-alert button.confirm').should('be.visible').click({force:true});
-      cy.wait(2000)
-      cy.location('pathname', { timeout: 10000 }).should('include', '/create-invitation/');
-       cy.get('#nextDetails').click()
-       cy.get("#vTitle", { timeout: 15000 }).should('be.visible').type(title)
-       cy.get('#saveGreeting').click()
-       cy.get('#downloadGreeting').should('contain', 'Pay to Download')
-       
+        // First select a card
+        cy.get("#mix-up-list").find('.cd-item').eq(0).click({force: true})
+        cy.wait(2000) // Wait for card to be selected
+        
+        // Wait for and click on Personalize Event Card button
+        cy.get('a.customize-link1').should('be.visible').should('contain', 'Personalize Event').click({force: true})
+        cy.wait(2000)
+        
+        // Handle the popup
+        cy.get('.sweet-alert h2').should('have.text', 'Event Cards')
+        cy.get('div.sweet-alert button.confirm').should('be.visible').click({force: true})
+        cy.wait(2000)
+        
+        // Check if URL contains /create-invitation/
+        cy.location('pathname', { timeout: 10000 }).should('include', '/create-invitation/')
+        
+        // Click Next Details button
+        cy.get('#nextDetails').click()
+        
+        // Check if event title input exists and fill it
+        cy.get("#vTitle1", { timeout: 15000 }).should('be.visible').type(title)
+        
+        // Click Save button
+        cy.get('#saveGreeting').click()
+        
+        // Check if download button is present
+        cy.get('#downloadGreeting').should('contain', 'Pay to Download')
     }
+
+    createInviteWithEditedData(initialTitle, editedTitle, initialPhoneNo, editedPhoneNo, initialVenue, editedVenue, location, mesg, regionalmesg)
+    {
+      cy.contains('a', 'Personalize RSVP').should('exist').click()
+      cy.get('#nextDetails').click()
+      cy.wait(10000)
+      
+      // first, enter initial data
+      cy.get("#vTitle", { timeout: 15000 }).should('be.visible').type(initialTitle)
+      cy.get('#vPhone').type(initialPhoneNo)
+      cy.get('#vLocationName').type(initialVenue)
+      cy.get('#vFA').type(location).wait(4000)
+      // click on the first suggestion
+      cy.get('.pac-item').first().click();
+      
+      // now, edit the data
+      cy.get("#vTitle").clear().type(editedTitle)
+      cy.get('#vPhone').clear().type(editedPhoneNo)
+      cy.get('#vLocationName').clear().type(editedVenue)
+      
+      cy.get('#nextSettings').click()
+      cy.get('#addMessage').click({ force: true })
+      cy.get('#tMessageieditor').type(mesg)
+      cy.get('#addLangMessage').click({ force: true })
+      cy.get('#tOtherMessage').type(regionalmesg).type('{enter}')
+      cy.get('#create-preview-card').click()
+      cy.get('#addGuests').scrollIntoView()
+      cy.wait(1000)
+    }
+
+   selectDoItYourself()
+   {
+      cy.visit("https://dev.inytes.com/invitations")
+      
+      // Click on "Upload your Design" under Do It Yourself
+      cy.get('a[data-cat="upload"]').contains('Upload your Design').click()
+      cy.wait(3000)
+      
+      // Select the Upload Yours card
+      cy.get('a.cd-trigger[title="Upload Yours"]').first().click()
+   }
+
+   selectDoItYourselfLandscape()
+   {
+      cy.visit("https://dev.inytes.com/invitations")
+      
+      // Click on "Upload your Design" under Do It Yourself  
+      cy.get('a[data-cat="upload"]').contains('Upload your Design').click()
+      cy.wait(3000)
+      
+      // Select the Upload Yours - Landscape card
+      cy.get('a.cd-trigger[title="Upload Yours - Landscape"]').click()
+   }
+
+   createEventCard(title)
+   {
+      cy.get('a.customize-link1').contains('Event').click({force: true})
+      cy.wait(2000)
+      
+      cy.get('.sweet-alert h2').should('contain', 'Event')
+      cy.get('div.sweet-alert button.confirm').click({force: true})
+      cy.wait(3000)
+      
+      // Image upload is REQUIRED for Do it yourself cards
+      // First click on "Upload Or Update Photo" button/area
+      cy.get('#openCropModal1 .openCropModalBtn').click({force: true})
+      cy.wait(1000)
+      
+      // Alternative selectors if the above doesn't work:
+      // cy.get('.openCropModal .openCropModalBtn').click({force: true})
+      // cy.get('svg.openCropModalBtn').click({force: true})
+      // cy.contains('Upload Or Update Photo').click({force: true})
+      
+      // Then select the file from fixtures
+      cy.get('input[type="file"]').selectFile('cypress/fixtures/test-image.png', { force: true })
+      cy.wait(3000) // Wait for image to upload
+      
+      // Click crop/confirm button if it appears
+      cy.get('body').then(($body) => {
+         if ($body.find('#cropButton').length > 0) {
+            cy.get('#cropButton').click({force: true})
+            cy.wait(2000)
+         } else if ($body.find('.crop-btn, .confirm-crop, .apply-crop').length > 0) {
+            cy.get('.crop-btn, .confirm-crop, .apply-crop').first().click({force: true})
+            cy.wait(2000)
+         }
+      });
+      
+      // Wait for upload processing to complete
+      cy.wait(3000)
+      
+      // Now proceed with filling in the details
+      cy.get('#nextDetails').click()
+      cy.wait(2000)
+      
+      cy.get("#vTitle1", { timeout: 15000 }).type(title, {force: true})
+      cy.get('#vHostName1').type('Test Host Name', {force: true})
+      cy.get('#dCountry').select('INDIA', {force: true})
+      cy.get('#dDate1').type('2025-12-31', {force: true})
+      
+      cy.get('#saveGreeting').click({force: true})
+      cy.wait(9000)
+   }
+
+
 
 }
 export default CreateCard;
