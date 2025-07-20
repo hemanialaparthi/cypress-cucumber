@@ -61,7 +61,7 @@ Given Select any Featured cards
 When create the Invitation with personalize RSVP card
 Then Invitation should be created
 
-
+@focus
 Scenario: User should able to create RSVP card from the Popular Cards.
 # Given Login into the application
 Given Select any Popular card

@@ -315,20 +315,28 @@ class CreateCard
    selectDoItYourself()
    {
       cy.visit("https://dev.inytes.com/invitations")
-      cy.get('#filter-menu').find('a[data-cat="upload"]').contains('Do It').click()
+      
+      // Click on "Upload your Design" under Do It Yourself
+      cy.get('a[data-cat="upload"]').contains('Upload your Design').click()
       cy.wait(3000)
+      
+      // Select the Upload Yours card
       cy.get('a.cd-trigger[title="Upload Yours"]').first().click()
    }
 
    selectDoItYourselfLandscape()
    {
       cy.visit("https://dev.inytes.com/invitations")
-      cy.get('#filter-menu').find('a[data-cat="upload"]').contains('Do It').click()
+      
+      // Click on "Upload your Design" under Do It Yourself  
+      cy.get('a[data-cat="upload"]').contains('Upload your Design').click()
       cy.wait(3000)
+      
+      // Select the Upload Yours - Landscape card
       cy.get('a.cd-trigger[title="Upload Yours - Landscape"]').click()
    }
 
-   createEventCard(title, requiresImageUpload = false)
+   createEventCard(title)
    {
       cy.get('a.customize-link1').contains('Event').click({force: true})
       cy.wait(2000)
@@ -337,14 +345,38 @@ class CreateCard
       cy.get('div.sweet-alert button.confirm').click({force: true})
       cy.wait(3000)
       
-      if (requiresImageUpload) {
-         cy.get('input[type="file"]').selectFile('cypress/fixtures/test-image.png', { force: true })
-         cy.wait(2000)
-         cy.get('#cropButton').click({force: true})
-         cy.wait(2000)
-      }
+      // Image upload is REQUIRED for Do it yourself cards
+      // First click on "Upload Or Update Photo" button/area
+      cy.get('#openCropModal1 .openCropModalBtn').click({force: true})
+      cy.wait(1000)
       
+      // Alternative selectors if the above doesn't work:
+      // cy.get('.openCropModal .openCropModalBtn').click({force: true})
+      // cy.get('svg.openCropModalBtn').click({force: true})
+      // cy.contains('Upload Or Update Photo').click({force: true})
+      
+      // Then select the file from fixtures
+      cy.get('input[type="file"]').selectFile('cypress/fixtures/test-image.png', { force: true })
+      cy.wait(3000) // Wait for image to upload
+      
+      // Click crop/confirm button if it appears
+      cy.get('body').then(($body) => {
+         if ($body.find('#cropButton').length > 0) {
+            cy.get('#cropButton').click({force: true})
+            cy.wait(2000)
+         } else if ($body.find('.crop-btn, .confirm-crop, .apply-crop').length > 0) {
+            cy.get('.crop-btn, .confirm-crop, .apply-crop').first().click({force: true})
+            cy.wait(2000)
+         }
+      });
+      
+      // Wait for upload processing to complete
+      cy.wait(3000)
+      
+      // Now proceed with filling in the details
       cy.get('#nextDetails').click()
+      cy.wait(2000)
+      
       cy.get("#vTitle1", { timeout: 15000 }).type(title, {force: true})
       cy.get('#vHostName1').type('Test Host Name', {force: true})
       cy.get('#dCountry').select('INDIA', {force: true})

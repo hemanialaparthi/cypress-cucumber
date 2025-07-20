@@ -5,7 +5,8 @@ Scenario: User should able to navigate to Add Guest tab page.
 Given user selects the 1st card from the profile
 When click on Add Guest tab
 Then Page should navigate to Invite tab
-@focus
+
+
 Scenario: Send invite to 2 Guests for Non premium Cards.
 
 Given Navigate to Add Guests tab
