@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:run": "cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true",
-  "merge:reports": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/merged-report.json",
-  "generate:report": "marge cypress/reports/mochawesome/merged-report.json --reportDir cypress/reports/mochawesome/html",
-  "test:report": "npm run cypress:run && npm run merge:reports && npm run generate:report"
+    "merge:reports": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/merged-report.json",
+    "generate:report": "marge cypress/reports/mochawesome/merged-report.json --reportDir cypress/reports/mochawesome/html",
+    "test:report": "npm run cypress:run && npm run merge:reports && npm run generate:report"
   },
   "keywords": [
     "Cypress"
@@ -30,5 +30,13 @@
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinition": true,
     "step_definitions": "cypress/e2e/Inytes"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemanialaparthi/cypress-cucumber.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hemanialaparthi/cypress-cucumber/issues"
+  },
+  "homepage": "https://github.com/hemanialaparthi/cypress-cucumber#readme"
 }
