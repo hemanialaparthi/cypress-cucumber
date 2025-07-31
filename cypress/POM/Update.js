@@ -61,24 +61,63 @@ class UpdateCard
          //Edit Time
          cy.get('#vStartTime').clear().type(editstartTime).type('{enter}')
          // cy.get('.ui-timepicker-list').eq(1).scrollTo("bottom").contains(editstartTime).click()
-         cy.get('#addEndTime').click()
-         cy.get('#vEndTime').clear().type(editendTime).type('{enter}')
+
+         // Check if end time field is already visible, if not, click to add it
+         cy.get('#endTime').then($endTime => {
+           if ($endTime.is(':hidden')) {
+             cy.get('#addEndTime').click()
+           }
+         })
+
+         cy.get('#endTime').should('be.visible')
+         cy.get('#vEndTime').should('be.visible').click().clear().type(editendTime).type('{enter}')
          // cy.get('.ui-timepicker-list').eq(2).scrollTo("bottom").contains(editendTime).click()
 
          //Edit Venue
          cy.get('#vLocationName').clear().type(editVenue)
 
+         // Ensure we're on the correct address input tab before editing full address
+         cy.get('#locate_map_addr').click()
+         cy.wait(1000)
+         cy.on('window:alert', (text) => {
+           expect(text).to.equal('The unsaved address information will be lost. Please confirm. '); // Validate alert text
+         });
+
+         // Check if confirm button exists before clicking
+         cy.get('body').then($body => {
+           if ($body.find('.confirm').length > 0) {
+             cy.get('.confirm').click({force:true});
+           }
+         });
+
          //Edit Full address
-         cy.get('#vFA').clear().type(editLocation).wait(4000)
+         cy.get('#vFA').should('be.visible').clear().type(editLocation).wait(4000)
          cy.get('.pac-item').first().click()
 
        //Click on Next
        cy.get("#nextSettings").click()
        //Edit Regional Message
-       cy.get('#addMessage').click({ force: true })
-       cy.get('#tMessageieditor').clear().type(editmesg)      
-       cy.get('#addLangMessage').click({ force: true })
-       cy.get('#tOtherMessage').clear().type(editregionalmesg).type('{enter}')
+       // First ensure the checkbox is checked
+       cy.get('#addMessage').then($checkbox => {
+         if (!$checkbox.is(':checked')) {
+           cy.get('#addMessage').click({ force: true })
+         }
+       })
+       
+       // Wait for the message wrapper to become visible
+       cy.get('#addMessage_wrap').should('be.visible')
+       cy.get('#tMessageieditor').should('be.visible').clear().type(editmesg)      
+       
+       // Handle language message similarly
+       cy.get('#addLangMessage').then($checkbox => {
+         if (!$checkbox.is(':checked')) {
+           cy.get('#addLangMessage').click({ force: true })
+         }
+       })
+       
+       cy.get('#addLangMessage_wrap').should('be.visible')
+       cy.get('#tOtherMessage').should('be.visible').clear().type(editregionalmesg)
+
        //Click on Save Card
        cy.get("#create-preview-card").click()
 
@@ -257,6 +296,15 @@ class UpdateCard
       cy.wait(10000)
       cy.get('#manual_addr_tab').click() 
       cy.wait(1000)
+      
+      // Add the missing popup handling code
+      cy.on('window:alert', (text) => {
+        expect(text).to.equal('The unsaved address information will be lost. Please confirm. '); // Validate alert text
+      });
+      
+      cy.get('.confirm').click({force:true});
+      
+      // Now clear the fields after handling the popup
       cy.get('#street').clear()
       cy.get('#city').clear()
       cy.get('#state').clear()

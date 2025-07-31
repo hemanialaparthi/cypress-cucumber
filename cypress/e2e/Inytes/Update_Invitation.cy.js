@@ -97,7 +97,6 @@ Then("Alert popup should appear", ()=>
     expect(text).to.equal('The unsaved address information will be lost. Please confirm. '); // Validate alert text
   });
   
-  cy.get('.confirm').click();
 })
 
 Then("Edit the location from Locate address to Manual address.", ()=>
@@ -150,6 +149,25 @@ Then("Edit the location from Locate address to Manual address.", ()=>
   {
       const update = new UpdateCard()
       update.unselectAllradiobuttons()
+  })
+
+  Then("User should able to receive an alert message when trying to update the address from locate to add manually", () => {
+    cy.url().should('include', '/edit-invitation/')
+    
+    //Click on Next
+    cy.get("#nextDetails").click()
+    cy.wait(10000)
+    
+    // Set up alert handler before the action
+    cy.window().then((win) => {
+      cy.stub(win, 'alert').returns(true).as('windowAlert')
+    })
+    
+    // Click on manual address tab to trigger the alert
+    cy.get('#manual_addr_tab').click() 
+    
+    // Verify the alert message appeared
+    cy.get('@windowAlert').should('have.been.calledWith', 'The unsaved address information will be lost. Please confirm. ')
   })
 
 
