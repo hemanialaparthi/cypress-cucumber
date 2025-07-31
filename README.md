@@ -1,5 +1,7 @@
 # Cypress-Cucumber Test Automation Framework
 
+This repository is a preserved and maintained copy of the original [Cypress-Cucumber](https://github.com/Kovidha-123/Cypress-Cucumber) project. The original owner's account has since been deleted, and this version was created with the author’s permission to ensure continued updates and collaboration.
+
 This project contains automated tests for the Inytes application using Cypress with Cucumber.
 
 ## 📋 Table of Contents
